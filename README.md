@@ -22,6 +22,13 @@ In order to Setup QR Bill to Working Following Things are Required
 3. Create A Bank Account For Company with IBAN
 4. Add Entry in Swiss QR Bill Settings for Company
 
+### To build updated js code
+```
+npx webpack --config webpack.config.js
+Bench build
+Bench restart
+```
+
 #### License
 
 GNU GPL V3
