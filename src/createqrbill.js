@@ -41,10 +41,7 @@ export const createQRBill = async (frm) => {
   const { iban } = await getDocument("Bank Account", bankAccount);
 
   showProgress(40, "generating pdf...");
-  if (companyAddress.country !== "Switzerland") {
-    showError("Company Should Be Switzerland");
-    return;
-  }
+
   const companyCountry = await getDocument("Country", companyAddress.country);
   const customerCountry = await getDocument("Country", customerAddress.country);
 
