@@ -12,7 +12,7 @@ app_email = "paideepak@gmail.com"
 app_license = "MIT"
 fixtures = [
     {"dt": "Custom Field", "filters": [["fieldname", "in", ("esr_reference_code", 'tax_code', 'exported_to_abacus')]]}, 
-    {"doctype": "Custom Field", "filters": [["dt", "=", "Bank Statement Import"]]}
+    {"doctype": "Custom Field", "filters": [["dt", "=", "Bank Statement Import"]]},
 ]
 
 # Includes in <head>
@@ -105,8 +105,7 @@ doc_events = {
     }, 
     "Bank Transaction": {
         "on_submit": "swiss_accounting_integration.camt_erpnext.bank_transaction_auto_match.bank_transaction_auto_match"
-    }
-
+    },
 }
 
 # Scheduled Tasks
