@@ -10,8 +10,10 @@ app_icon = "octicon octicon-file-directory"
 app_color = "grey"
 app_email = "paideepak@gmail.com"
 app_license = "MIT"
-fixtures = [{"dt": "Custom Field", "filters": [
-    ["fieldname", "in", ("esr_reference_code", 'tax_code', 'exported_to_abacus')]]}]
+fixtures = [
+    {"dt": "Custom Field", "filters": [["fieldname", "in", ("esr_reference_code", 'tax_code', 'exported_to_abacus')]]}, 
+    {"doctype": "Custom Field", "filters": [["dt", "=", "Bank Statement Import"]]}
+]
 
 # Includes in <head>
 # ------------------
@@ -20,6 +22,9 @@ fixtures = [{"dt": "Custom Field", "filters": [
 # app_include_css = "/assets/swiss_accounting_integration/css/swiss_accounting_integration.css"
 # app_include_js = "/assets/swiss_accounting_integration/js/swiss_accounting_integration.js"
 app_include_js = "/assets/swiss_accounting_integration/js/index.js"
+
+# include js in doctype views
+doctype_js = {"Bank Statement Import" : "public/js/bank_statement_import.js"}
 
 # include js, css files in header of web template
 # web_include_css = "/assets/swiss_accounting_integration/css/swiss_accounting_integration.css"
@@ -97,7 +102,11 @@ app_include_js = "/assets/swiss_accounting_integration/js/index.js"
 doc_events = {
     "Abacus Export": {
         "on_submit": "swiss_accounting_integration.attach_xml",
+    }, 
+    "Bank Transaction": {
+        "after_submit": "swiss_accounting_integration.camt_erpnext.bank_transaction_auto_match.bank_transaction_auto_match"
     }
+
 }
 
 # Scheduled Tasks

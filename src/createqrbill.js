@@ -23,7 +23,15 @@ import {
 
 export const createQRBill = async (frm) => {
   showProgress(10, "getting data...");
-  const customer = frm.doc.customer_name;
+  var customer = ""
+
+  // If customer name exists separately
+  if (!frm.doc.customer_name) {
+    customer = frm.doc.customer
+  } else {
+    customer = frm.doc.customer_name
+  }
+
   const amount = frm.doc.outstanding_amount;
   const reference = getReferenceCode(frm.doc.name);
   const company = frm.doc.company;

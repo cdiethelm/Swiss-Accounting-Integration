@@ -6,10 +6,11 @@ and Abacus Export
 
 ### Structure
 
-App Contains 2 Modules
+App Contains 3 Modules
 
 1. Abacus Exports
 2. Swiss QR Bill
+3. CAMT Import for Switzerland
 
 #### Swiss QR Bill
 
