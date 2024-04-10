@@ -104,7 +104,7 @@ doc_events = {
         "on_submit": "swiss_accounting_integration.attach_xml",
     }, 
     "Bank Transaction": {
-        "after_submit": "swiss_accounting_integration.camt_erpnext.bank_transaction_auto_match.bank_transaction_auto_match"
+        "on_submit": "swiss_accounting_integration.camt_erpnext.bank_transaction_auto_match.bank_transaction_auto_match"
     }
 
 }

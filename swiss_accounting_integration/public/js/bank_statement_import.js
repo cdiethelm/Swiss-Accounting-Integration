@@ -1,7 +1,6 @@
 frappe.ui.form.on("Bank Statement Import", {
     
     custom_convert_xml_to_csv(frm,cdt,cdn){
-        console.log("clicked conversion")
         
         frappe.call({
                 method: "swiss_accounting_integration.camt_erpnext.bank_statement_import.convert_xml_to_csv",
@@ -9,7 +8,8 @@ frappe.ui.form.on("Bank Statement Import", {
                     file: frm.doc.custom_camt_xml_file
                                 
         },callback: function (r) {
-            console.log("this is the original path "+ r.message);
+
+
             var value = r.message
             var value_path = value.split('files/')
             console.log("this is value path "+ value_path)

@@ -21,12 +21,10 @@ def remove_namespaces(xml_file):
 def convert_xml_to_csv(file):
 
     xml_file = get_absolute_path(file) #getting file with path
-    #frappe.msgprint(xml_file)
 
     current_date= datetime.now()
     current_datetime = current_date.strftime("%d-%m-%Y %H:%M:%S")
 
-    #frappe.msgprint(current_time)
     filename = f'{frappe.utils.get_bench_path()}/sites/{frappe.utils.get_site_base_path()[2:]}/public/files/{current_datetime}.csv'
     
     # Parse the XML and remove namespace
@@ -42,7 +40,7 @@ def convert_xml_to_csv(file):
 
         # Iterate through each Ntry (entry) element in the XML
         for ntry in root.findall('.//Ntfctn/Ntry'):
-            frappe.log(ntry)
+
             # Extract common data for all transactions in this entry
             date = ntry.find('.//BookgDt/Dt').text
             bank_account = root.find('.//Acct/Id/IBAN').text
@@ -50,7 +48,7 @@ def convert_xml_to_csv(file):
             # Transactions could be multiple; iterate through each TxDtls (Transaction Details)
             for tx in ntry.findall('.//TxDtls'):
                 # Initialize a description string
-                description = f"Payment from {tx.find('.//Dbtr/Nm').text if tx.find('.//Dbtr/Nm') is not None else 'Unknown'}"
+                description = f"Payment from {tx.find('.//Dbtr/Pty/Nm').text if tx.find('.//Dbtr/Pty/Nm') is not None else 'Unknown'}"
                 amt = tx.find('.//Amt').text
                 cdt_dbt_ind = tx.find('.//CdtDbtInd').text
                 reference = tx.find('.//CdtrRefInf/Ref').text
@@ -64,24 +62,10 @@ def convert_xml_to_csv(file):
                     deposit = amt
                 else: 
                     withdrawal = amt
-
                 
                 # Append the extracted information to the records list
                 csv_writer.writerow([date,bank_account,'',deposit,withdrawal,reference,description])
-        frappe.log("finished")
     
-        '''
-           fileurl= filename
-           filename1 = fileurl.split('files/')
-           filenames = filename1[1]
-           
-           doc = frappe.get_doc({
-           'doctype': 'File',
-           'file_name': filenames,
-           'file_url':"/files/"+filenames
-           })
-           doc.insert()
-        '''
     return filename
 
 #@frappe.whitelist()

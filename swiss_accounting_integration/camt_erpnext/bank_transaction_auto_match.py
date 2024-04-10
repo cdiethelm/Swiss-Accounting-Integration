@@ -1,7 +1,7 @@
 import frappe
 
 @frappe.whitelist()
-def bank_transaction_auto_match.py(doc, event=None): 
+def bank_transaction_auto_match(doc, event=None): 
     
     # Only do this for Unreconciled docs
     if doc.status == "Unreconciled": 
